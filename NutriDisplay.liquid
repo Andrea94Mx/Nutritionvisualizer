@@ -1,0 +1,220 @@
+<div class="PreparationNutriMain">
+  
+  <!-- <div class="aboutProdTitle"><h1 style="color:white;">About the Product</h1></div> -->
+    <div class="nutriButtonsTab">
+  
+  
+  
+      <div class="nutriButton">
+        <button class="nutritionButton">Nutrition</button>
+      </div>
+      <div class="prepButton">
+        <button class="preparationButton">Preparation</button>
+      </div>
+    </div>
+  
+    <div class="nutritionImg">
+      <div class="imageContainer">
+        <img src="{{ section.settings.nutritionImage | img_url:'1100x' }}" alt="Nutrition Image">
+      </div>
+  
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.nutri }}">{{ block.settings.text }}</a>
+        {{ block.settings.html_content | raw }}
+      {% endfor %}
+    </div>
+  
+    <div class="preparationText  specialSection">
+      <p>{{ section.settings.preparationText }}</p>
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.prep }}">{{ block.settings.text }}</a>
+        {{ block.settings.rich_text_content | raw }}
+      {% endfor %}
+  
+    </div>
+  </div>
+  
+  <script>
+  // Get references to the buttons and the corresponding elements
+  const nutriButton = document.querySelector('.nutritionButton');
+  const prepButton = document.querySelector('.preparationButton');
+  const nutritionImg = document.querySelector('.nutritionImg');
+  const preparationText = document.querySelector('.preparationText');
+  
+  // Hide the preparationText & fix the font-weight on Nutrition
+  preparationText.style.display = 'none';
+  nutriButton.style.fontWeight = '700';
+  
+  // Add event listener for nutriButton
+  nutriButton.addEventListener('click', function() {
+    nutritionImg.style.display = 'block';
+    preparationText.style.display = 'none';
+  
+    nutriButton.style.fontWeight = '700';
+    prepButton.style.fontWeight = '500';
+  });
+  
+  // Add event listener for prepButton
+  prepButton.addEventListener('click', function() {
+    nutritionImg.style.display = 'none';
+    preparationText.style.display = 'block';
+  
+    nutriButton.style.fontWeight = '500';
+    prepButton.style.fontWeight = '700';
+  });
+  </script>
+  
+  
+  <style>
+  
+  
+  .PreparationNutriMain{
+  background-color: #303030;
+    color:white;
+      padding-bottom: 5%;
+  margin-left:10%;
+  margin-right:10%;
+  }
+  
+    .nutriButtonsTab {
+      display: flex;
+      margin-left: 5%;
+      margin-right: 5%;
+  height: 20%;
+      height: 75px;
+      
+    }
+  
+    .nutriButton {
+      flex: 1;
+    }
+  
+    .prepButton {
+      flex: 1;
+    }
+  
+    .nutriButton button {
+      width: 100%;
+  cursor:pointer;
+    }
+  
+    .prepButton button {
+      width: 100%;
+  cursor:pointer;
+    }
+  
+    .imageContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left:5%;
+      margin-right:5%;
+    }
+  
+    .imageContainer img {
+      height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+  
+  .aboutProdTitle{
+      margin-left: 5%;
+      margin-right: 5%;
+  }
+  
+  .preparationText{
+     margin-left: 5%;
+      margin-right: 5%;
+  }
+  
+  .nutritionButton{
+      height: 90%;
+      border: none;
+      background: #303030;
+      border-bottom: 5px solid #d3aa3f;
+      font-size: larger;
+  font-weight: 500;
+  color: #d3aa3f;
+  }
+  
+  .preparationButton{
+      height: 90%;
+      border: none;
+      background: #303030;
+      border-bottom: 5px solid #d3aa3f;
+      font-size: larger;
+  font-weight: 500;
+  color: #d3aa3f;
+      
+  }
+  
+  .nutriButton button:hover{
+  background: #666666;
+  
+  }
+  
+  .prepButton button:hover{
+  background: #666666;
+  }
+  
+  .preparationText p{
+  font-size: 2.3rem;
+  }
+  
+  .preparationText h1{
+  font-size: 3rem;
+  Font-weight: 700;
+  
+  }
+  
+  
+  .strong {
+  font-family:Assistant, sans-serif;
+  color:white;
+  }
+  
+  .specialSection h1{
+  font-family:Assistant, sans-serif;
+  color:white !important;
+  }
+  
+  .specialSection h2 {
+  font-family:Assistant, sans-serif;
+  color:white;
+    font-weight: 700;
+  font-size: 3.5rem;
+  }
+  
+  .specialSection strong {
+  font-family:Assistant, sans-serif;
+  color:white;
+  }
+  
+  </style>
+  
+  
+  
+  
+  {% schema %}
+  {
+    "name": "Nutriprep",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "nutritionImage",
+        "label": "Nutrition Image"
+      },
+      {
+        "type": "richtext",
+        "id": "preparationText",
+        "label": "Preparation Text",
+        "default": "<p>Preparation text</p>"
+      }
+    ],
+  "presets":[
+        {
+  "name": "Nutriprep"
+  }
+      ]
+  }
+  {% endschema %}
